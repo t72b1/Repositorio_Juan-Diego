@@ -6,36 +6,45 @@ def lectura():
       lines=f.readlines()
       f.close()
       for i in lines:
-             a=i.rstrip('\n').split('\n')
+             a=i.rstrip('\n').split(',')#Elimina los indicadores de salto de linea y divide la lista apartir de estos mismos
              datos.append(a)
-             for i in datos:
-                  a=i.split(',')#Elimina los indicadores de salto de linea y divide la lista apartir de estos mismos
-                  home_team=a[0]
-                  away_team=a[1]
-                  home_score=a[2]
-                  home_penalty=a[3]
-                  away_score=a[4]
-                  away_penalty=a[5]
-                  home_manager=a[6]
-                  home_captain=a[7]
-                  away_manager=a[8]
-                  away_captain=a[9]
-                  attendace=a[10]
-                  veneau=a[11]
-                  round=a[12]
-                  date=a[13]
-                  referee=a[14]
-                  host=a[15]
-                  year=a[16]
-                  print(host)
+
+             for f in datos:
+                  home_team=f[0]
+                  away_team=f[1]
+                  home_score=f[2]
+                  home_penalty=f[3]
+                  away_score=f[4]
+                  away_penalty=f[5]
+                  home_manager=f[6]
+                  home_captain=f[7]
+                  away_manager=f[8]
+                  away_captain=f[9]
+                  attendace=f[10]
+                  veneau=f[11]
+                  round=f[12]
+                  date=f[13]
+                  referee=f[14]
+                  host=f[15]
+                  year=f[16]
+             if round=='Final' and year=='2022':
+                  print(home_team, away_team)
+
+      return datos
 
 
 
             
             
-def campeon_mundial():
-      pass
-
+def enfrentamiento():
+      listado=lectura()
+      equipo_1=input('Seleccione le primer equipio')
+      equipo_2=input('Seleccione el segundo equipo')
+      for
+      if equipo_1 in listado and equipo_2 in listado:
+           print('shit working')
+      else:
+            print('Ingrese 2 equipos validos')
 
 def main():
       listado=lectura()
@@ -52,4 +61,4 @@ def main():
 
 
 if __name__=="__main__":
-      lectura()
+      enfrentamiento()
