@@ -1,0 +1,264 @@
+class Ciudadano:
+    def __init__(self, nombre:str, cedula:str, edad:int):
+        self.__nombre=nombre
+        self.__cedula=cedula
+        self.__edad=edad
+
+    def setNombre(self,nombre:str):
+        self.__nombre=nombre
+    def getNombre(self):
+        return self. __nombre
+
+
+
+    def setCedula(self,cedula:str):
+        if isinstance(cedula,int) is True: #insinstance(cedula,int) en este caso pregunta si cedula es un entero
+            if cedula>0:
+                cedula=str(cedula) #Convierte cedula en string para que funcione la funcion len()
+                if len(cedula)>=8 and len(cedula)<=10: #Verifica que la cedula tenga entre 10 a 8 digitos
+                    self.__cedula=cedula
+                else:
+                    print('Porfavor ingrese una cedula valida')
+                    return False
+            else:
+                print('Porfavor ingrese una cedula valida')
+                return False
+        else:
+            print('Porfavor ingrese una cedula valida')
+            return False
+
+    def getCedula(self):
+        return self.__cedula
+
+
+    def setEdad(self,edad:int):
+        self.__edad=edad
+    def getEdad(self):
+        return self.__edad
+
+
+
+    def mostrar(self):
+         print(f'Nombre:{self.getNombre()}-Edad:{self.getEdad()}-CC:{self.getCedula()}')
+         if self.esMayorDeEdad(self.getEdad()) is True:
+             print('Es mayor de edad\n')
+         elif self.esMayorDeEdad(self.getEdad()) is False:
+             print('Es menor de edad\n')
+
+
+    def esMayorDeEdad(self,edad:int):
+        if edad>=18:
+            return True
+        elif edad<18 and edad>=0:
+            return False
+        else:
+            return 'No' #Descubri que si le doy devolver 0 tambien cuenta como falso entonces por eso decidi utilizar esto
+
+    def salario(self):
+      pass
+
+
+class Taxista(Ciudadano):
+  def __init__(self,nombre:str,cedula:str,edad:int,auto:str,tiempo:int):
+    super().__init__(nombre,cedula,edad)
+    self.auto=auto
+    self.tiempo=tiempo
+
+  def setAuto(self,auto:str):
+    self.auto=auto
+  def setTiempo(self,tiempo:int):
+    self.tiempo=tiempo
+
+  def getAuto(self):
+    return self.auto
+  def getTiempo(self):
+    return self.tiempo
+
+  def salario(self):
+      print('El salario promedio al año de un taxista es: $14.400.000')
+
+class Soldado(Ciudadano):
+  def __init__(self,nombre:str,cedula:str,edad:int,rango:str,rama:str):
+      super().__init__(nombre,cedula,edad)
+      self.rango=rango
+      self.rama=rama
+
+  def setRango(self,rango:str):
+    self.rango=rango
+  def setRama(self,rama:str):
+    self.rama=rama
+
+  def getRango(self):
+    return self.rango
+  def getRama(self):
+    return self.rama
+
+  def salario(self):
+    print('El salario promedio al año de un soldado es: $18.000.000, pero es muy dependiente en el rango')
+
+
+class Piloto(Ciudadano):
+  def __init__(self,nombre:str,cedula:str,edad:int,horas_vuelo:int,avion:str):
+     super().__init__(nombre,cedula,edad)
+     self.horas_vuelo=horas_vuelo
+     self.avion=avion
+
+  def setHorasVuelo(self,horas_vuelo:int):
+    self.horas_vuelo=horas_vuelo
+  def setAvion(self,avion:str):
+    self.avion=avion
+
+  def getHorasvuelo(self):
+    return self.horas_vuelo
+  def getAvion(self):
+    return self.avion
+
+  def salario(self):
+    print('El salario promedio al año de un piloto es: $100.000.000, pero es muy dependiente del tipo de aeronave')
+
+
+
+def ciudadano():
+    ciudadano=[]
+    opc='n'
+    while 1:
+        cd=Ciudadano("", "", 0) #Valores temporales para inicial la funcion
+        cd.setNombre(input('Nombre: '))
+        while cd.setCedula(int(input('Cédula: '))) == False:  #Mientras la funcion setCedula devuelva falso vuelve a preguntar por esta
+            cd.setCedula(input('Cedula: '))
+        cd.setEdad(int(input('Edad: ')))
+        while cd.esMayorDeEdad(cd.getEdad()) == 'No': #Llama a la funcion esMayorDeEdad con el paramatero getEdad y mientras sea no da edad invalida y pregunta otravez
+            print('Porfavor ingrese una edad valida.')
+            cd.setEdad(int(input('Edad: ')))
+        ciudadano.append(cd)
+        opc=input('Desea salir? (y/n)')
+        if opc.lower() == 'y':
+            break
+        elif opc.lower() == 'n':
+            continue
+        else:
+            print('Invalido')
+            break
+    print('\n') #Salto de linea por razones esteticas
+    for i in ciudadano:
+        i.mostrar()
+
+def taxista():
+  taxistas=[]
+  opc='n'
+  while 1:
+    tx=Taxista("", "", 0, 0, 0) #Valores temporales para inicial la funcion
+    tx.setNombre(input('Nombre: '))
+    while tx.setCedula(int(input('Cédula: '))) == False:  #Mientras la funcion setCedula devuelva falso vuelve a preguntar por esta
+            tx.setCedula(input('Cedula: '))
+    tx.setEdad(int(input('Edad: ')))
+    while tx.esMayorDeEdad(tx.getEdad()) == 'No': #Llama a la funcion esMayorDeEdad con el paramatero getEdad y mientras sea no da edad invalida y pregunta otravez
+            print('Porfavor ingrese una edad valida.')
+            tx.setEdad(int(input('Edad: ')))
+    tx.setAuto(input('Ingrese el modelo del auto que conduce el taxista'))
+    tx.setTiempo(int(input('Ingrese los años que ah sido taxista')))
+    taxistas.append(tx)
+    opc=input('Desea saliir? (y/n)')
+    if opc.lower() == 'y':
+      break
+    elif opc.lower() == 'n':
+      continue
+    else:
+      print('Invalido')
+      break
+  print('\n') #Salto de linea por razones esteticas
+  for i in taxistas:
+        print('-----------------------------------')
+        i.mostrar()
+        print(f'Profesion: Taxista')
+        print(f'Modelo de auto: {i.getAuto()}')
+        print(f'Años conduciendo:{i.getTiempo()}')
+        i.salario()
+        print('')
+        print('-----------------------------------')
+
+
+def soldado():
+  soldados=[]
+  opc='n'
+  while 1:
+    sl=Soldado("", "", 0, "", 0) #Valores temporales para inicial la funcion
+    sl.setNombre(input('Nombre: '))
+    while sl.setCedula(int(input('Cédula: '))) == False:  #Mientras la funcion setCedula devuelva falso vuelve a preguntar por esta
+            sl.setCedula(input('Cedula: '))
+    sl.setEdad(int(input('Edad: ')))
+    while sl.esMayorDeEdad(sl.getEdad()) == 'No': #Llama a la funcion esMayorDeEdad con el paramatero getEdad y mientras sea no da edad invalida y pregunta otravez
+            print('Porfavor ingrese una edad valida.')
+            sl.setEdad(int(input('Edad: ')))
+    sl.setRango(input('Ingrese el su rango'))
+    sl.setRama(input('Ingrese a que rama de las fuerzas armadas pertenece'))
+    soldados.append(sl)
+    opc=input('Desea saliir? (y/n)')
+    if opc.lower() == 'y':
+      break
+    elif opc.lower() == 'n':
+      continue
+    else:
+      print('Invalido')
+      break
+  print('\n') #Salto de linea por razones esteticas
+  for i in soldados:
+        print('-----------------------------------')
+        i.mostrar()
+        print(f'Profesion: Soldado')
+        print(f'Rango: {i.getRango()}')
+        print(f'Rama de las fuerzas armadas::{i.getRama()}')
+        i.salario()
+        print('')
+        print('-----------------------------------')
+
+
+def piloto():
+  pilotos=[]
+  opc='n'
+  while 1:
+    pl=Piloto("", "", 0, 0, "") #Valores temporales para inicial la funcion
+    pl.setNombre(input('Nombre: '))
+    while pl.setCedula(int(input('Cédula: '))) == False:  #Mientras la funcion setCedula devuelva falso vuelve a preguntar por esta
+            pl.setCedula(input('Cedula: '))
+    pl.setEdad(int(input('Edad: ')))
+    while pl.esMayorDeEdad(pl.getEdad()) == 'No': #Llama a la funcion esMayorDeEdad con el paramatero getEdad y mientras sea no da edad invalida y pregunta otravez
+            print('Porfavor ingrese una edad valida.')
+            pl.setEdad(int(input('Edad: ')))
+    pl.setHorasVuelo(input('Ingrese sus horas de vuelo'))
+    pl.setAvion(input('Ingrese el avion que pilotea'))
+    pilotos.append(pl)
+    opc=input('Desea saliir? (y/n)')
+    if opc.lower() == 'y':
+      break
+    elif opc.lower() == 'n':
+      continue
+    else:
+      print('Invalido')
+      break
+  print('\n') #Salto de linea por razones esteticas
+  for i in pilotos:
+      print('-----------------------------------')
+      i.mostrar()
+      print(f'Profesion:Piloto')
+      print(f'Horas de vuelo registradas: {i.getHorasvuelo()}')
+      print(f'Tipo de avion:{i.getAvion()}')
+      i.salario()  # Llamada al método salario()
+      print('')
+      print('-----------------------------------')
+
+
+
+def main():
+  x=input('Ingrese su profesion:').lower()
+  if x=='taxista':
+    taxista()
+  elif x=='soldado':
+    soldado()
+  elif x=='piloto':
+    piloto()
+  else:
+    ciudadano()
+
+if __name__=="__main__":
+    main()
